@@ -1,4 +1,4 @@
-package net.proselyte.springsecurityapp.controller;
+package com.company.controller;
 
 import com.company.dto.User;
 import com.company.service.SecurityService;
@@ -42,24 +42,33 @@ public class UserController {
         }
 
         userService.createUser(user);
-
         securityService.autoLogin(user.getUsername(), user.getConfirmPassword());
 
         return new RedirectView("/");
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public ModelAndView login() {
+        ModelAndView modelAndView = new ModelAndView("login");
+        modelAndView.addObject("user", new User());
+
+        return modelAndView;
     }
 
-   @GetMapping("/")
-    public ModelAndView userHome() {
-       ModelAndView modelAndView = new ModelAndView();
-       modelAndView.setViewName("user_home");
-       List<User> allUsers = userService.getAllUsers();
-       modelAndView.addObject("users", allUsers);
+    @PostMapping("/auto_login")
+    public RedirectView autologin(@ModelAttribute(value = "user") User user) {
+        securityService.autoLogin(user.getUsername(), user.getPassword());
 
-       return modelAndView;
+        return new RedirectView("/");
+    }
+
+    @GetMapping("/")
+    public ModelAndView userHome() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("user_home");
+        List<User> allUsers = userService.getAllUsers();
+        modelAndView.addObject("users", allUsers);
+
+        return modelAndView;
     }
 }
