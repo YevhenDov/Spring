@@ -1,91 +1,65 @@
-package com.company.controller;
+package net.proselyte.springsecurityapp.controller;
 
 import com.company.dto.User;
+import com.company.service.SecurityService;
 import com.company.service.UserService;
-import lombok.AllArgsConstructor;
+import com.company.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
+
 @RestController
-@ComponentScan(basePackages = "com.company")
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 
+    @Autowired
     private UserService userService;
 
-    @GetMapping("/homeAdmin")
-    public ModelAndView adminHome() {
-        ModelAndView modelAndView = new ModelAndView("admin_home");
-        List<User> allUsers = userService.getAllUsers();
-        modelAndView.addObject("users", allUsers);
+    @Autowired
+    private SecurityService securityService;
 
-        return modelAndView;
-    }
+    @Autowired
+    private UserValidator userValidator;
 
-    @GetMapping("/homeUser")
-    public ModelAndView userHome(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("user_home");
-        List<User> allUsers = userService.getAllUsers();
-        modelAndView.addObject("users", allUsers);
-
-        return modelAndView;
-    }
-
-
-    @GetMapping("/add")
-    public ModelAndView addUserForm() {
+    @GetMapping("/registration_form")
+    public ModelAndView registrationForm() {
         ModelAndView modelAndView = new ModelAndView("new_user");
         modelAndView.addObject("user", new User());
 
         return modelAndView;
     }
 
-    @PostMapping("/addOrUpdate")
-    public RedirectView addOrUpdate(@ModelAttribute("user") User user) {
+    @PostMapping("/registration")
+    public RedirectView registration(@ModelAttribute("user") User user, BindingResult bindingResult) {
+        userValidator.validate(user, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return new RedirectView("/registration_form");
+        }
+
         userService.createUser(user);
 
-        return new RedirectView("/");
-    }
-
-    @GetMapping("/edit")
-    public ModelAndView editUserForm(@RequestParam int id) {
-        ModelAndView modelAndView = new ModelAndView("edit_user");
-        User user = userService.getUserById(id);
-        modelAndView.addObject("user", user);
-
-        return modelAndView;
-    }
-
-    @GetMapping("/delete")
-    public RedirectView deleteUser(@RequestParam int id) {
-        userService.deleteUserById(id);
+        securityService.autoLogin(user.getUsername(), user.getConfirmPassword());
 
         return new RedirectView("/");
     }
-
 
     @GetMapping("/login")
-    public ModelAndView login(){
-        ModelAndView modelAndView = new ModelAndView("login");
-        modelAndView.addObject("user", new User());
-        return modelAndView;
+    public String login() {
+        return "login";
     }
 
-    @PostMapping("/login")
-    public RedirectView auth(@ModelAttribute("user") User user){
+   @GetMapping("/")
+    public ModelAndView userHome() {
+       ModelAndView modelAndView = new ModelAndView();
+       modelAndView.setViewName("user_home");
+       List<User> allUsers = userService.getAllUsers();
+       modelAndView.addObject("users", allUsers);
 
-        return new RedirectView("/");
-    }
-
-    @GetMapping("/admin")
-    public String admin(Model model){
-        return "/admin";
+       return modelAndView;
     }
 }

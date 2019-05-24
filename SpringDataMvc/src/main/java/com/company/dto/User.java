@@ -1,14 +1,14 @@
 package com.company.dto;
 
+import com.company.entity.RoleEntity;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import javax.validation.constraints.Email;
-import javax.xml.transform.sax.SAXResult;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,4 +24,6 @@ public class User {
     private LocalDateTime createdDate;
     private String username;
     private String password;
+    private String confirmPassword;
+    private Set<RoleEntity> roleEntities;
 }

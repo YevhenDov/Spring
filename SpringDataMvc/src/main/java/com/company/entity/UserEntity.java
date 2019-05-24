@@ -22,7 +22,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class UserEntity extends CreatableEntity {
 
     @Column(name = "name")
@@ -41,6 +41,11 @@ public class UserEntity extends CreatableEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "role")
-    UserRoleEum role;
+    @Transient
+    private String confirmPassword;
+
+    @ManyToMany
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleEntity> roleEntities;
 }

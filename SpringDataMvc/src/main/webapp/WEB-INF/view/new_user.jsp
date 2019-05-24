@@ -7,7 +7,7 @@
 <body>
 <div align="center">
     <h2>Create user</h2>
-    <form:form action="addOrUpdate" method="post" modelAttribute="user">
+    <form:form action="registration" method="post" modelAttribute="user">
         <table border="0" cellpadding="5">
             <tr>
                 <td>Name</td>
