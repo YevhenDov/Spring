@@ -1,6 +1,7 @@
 package com.company.service.impl;
 
 import com.company.dto.User;
+import com.company.exeption.EmptyEntityException;
 import com.company.interceptor.SimpleLogger;
 import com.company.repository.UserEntityRepository;
 import com.company.service.UserService;
@@ -30,11 +31,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(int id) {
-        if (userEntityRepository.findById(id) == null){
-            return (User) Optional.empty().get();
-        }
-        return userMapper.mapUserEntityToUser(userEntityRepository.findById(id).get());
+    public User getUserById(int id) throws EmptyEntityException {
+        return userMapper.mapUserEntityToUser(userEntityRepository.findById(id).orElseThrow(EmptyEntityException::new));
     }
 
     @Override
@@ -53,8 +51,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUserName(String username) {
-        return userMapper.mapUserEntityToUser(userEntityRepository.findByUsername(username).get());
+    public User getUserByUserName(String username) throws EmptyEntityException {
+        return userMapper.mapUserEntityToUser(userEntityRepository.findByUsername(username).orElseThrow(EmptyEntityException::new));
     }
 }
 
