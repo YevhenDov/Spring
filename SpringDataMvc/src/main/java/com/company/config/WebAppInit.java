@@ -10,8 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 public class WebAppInit implements WebApplicationInitializer {
-
-
     private static final String DISPATCHER_SERVLET = "dispatcher";
 
     @Override

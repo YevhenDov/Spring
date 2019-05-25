@@ -2,6 +2,7 @@ package com.company.validator;
 
 import com.company.dto.User;
 import com.company.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -9,9 +10,9 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserValidator implements Validator {
 
-    @Autowired
     private UserService userService;
 
     @Override

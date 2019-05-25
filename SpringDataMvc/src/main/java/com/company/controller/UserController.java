@@ -4,6 +4,7 @@ import com.company.dto.User;
 import com.company.service.SecurityService;
 import com.company.service.UserService;
 import com.company.validator.UserValidator;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +15,11 @@ import java.util.List;
 
 
 @RestController
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 
-    @Autowired
     private UserService userService;
-
-    @Autowired
     private SecurityService securityService;
-
-    @Autowired
     private UserValidator userValidator;
 
     @GetMapping("/registration_form")
