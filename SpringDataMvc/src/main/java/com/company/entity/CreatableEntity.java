@@ -1,14 +1,13 @@
 package com.company.entity;
 
 import com.company.listener.CreatableEnmityListener;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -17,5 +16,5 @@ import java.time.LocalDateTime;
 public class CreatableEntity extends BaseEntity {
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    private LocalDate createdDate;
 }

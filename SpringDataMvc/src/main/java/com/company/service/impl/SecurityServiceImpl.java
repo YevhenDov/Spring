@@ -1,6 +1,7 @@
 package com.company.service.impl;
 
 import com.company.service.SecurityService;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
@@ -13,12 +14,10 @@ import org.springframework.stereotype.Service;
 
 @Log4j
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class SecurityServiceImpl implements SecurityService {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
     private UserDetailsService userDetailsService;
 
     @Override

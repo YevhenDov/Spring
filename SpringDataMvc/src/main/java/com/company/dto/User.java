@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import javax.validation.constraints.Email;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
@@ -21,7 +21,7 @@ public class User {
     private Integer age;
     @Email
     private String email;
-    private LocalDateTime createdDate;
+    private LocalDate createdDate;
     private String username;
     private String password;
     private String confirmPassword;
