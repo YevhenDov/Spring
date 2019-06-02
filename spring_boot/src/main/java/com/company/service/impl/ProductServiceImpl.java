@@ -14,8 +14,8 @@ import java.util.List;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ProductServiceImpl implements ProductService {
 
-    private ProductEntityRepository repository;
-    private ProductMapper mapper;
+    private final ProductEntityRepository repository;
+    private final ProductMapper mapper;
 
     @Override
     public void createProduct(Product product) {

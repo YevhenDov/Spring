@@ -22,9 +22,9 @@ import java.util.Set;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 
-    private UserServiceImpl userService;
-    private RoleServiceImpl roleService;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserServiceImpl userService;
+    private final RoleServiceImpl roleService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @GetMapping("/")

@@ -15,8 +15,8 @@ import java.util.List;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ProducerServiceImpl implements ProducerService {
 
-    private ProducerEntityRepository repository;
-    private ProducerMapper mapper;
+    private final ProducerEntityRepository repository;
+    private final ProducerMapper mapper;
 
     @Override
     public void createProducer(Producer producer) {

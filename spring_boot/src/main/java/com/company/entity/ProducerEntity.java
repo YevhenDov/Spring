@@ -26,5 +26,5 @@ public class ProducerEntity extends BaseEntity{
     private String name;
 
     @OneToMany(mappedBy = "producer")
-    Set<ProductEntity> products;
+    private Set<ProductEntity> products;
 }

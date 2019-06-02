@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class RoleServiceImpl implements RoleService {
 
-    private RoleEntityRepository repository;
+    private final RoleEntityRepository repository;
 
     @Override
     public List<RoleEntity> getRoleEntities() {

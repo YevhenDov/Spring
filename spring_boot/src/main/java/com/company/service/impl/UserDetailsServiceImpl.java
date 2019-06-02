@@ -20,8 +20,8 @@ import java.util.List;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    UserServiceImpl userService;
-    RoleServiceImpl roleService;
+    private final UserServiceImpl userService;
+    private final RoleServiceImpl roleService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

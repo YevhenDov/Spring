@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ProducerController {
 
-    ProducerServiceImpl service;
+    private final ProducerServiceImpl service;
 
     @GetMapping("/admin/producers")
     public String getAllProducers(Model model){

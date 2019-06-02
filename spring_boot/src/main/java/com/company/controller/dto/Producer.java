@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class Producer {
-    Long id;
+    private Long id;
     private String name;
-    Set<ProductEntity> products;
+    private Set<ProductEntity> products;
 }

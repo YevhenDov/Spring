@@ -18,8 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ProductController {
 
-    ProductServiceImpl productService;
-    ProducerServiceImpl producerService;
+    private final ProductServiceImpl productService;
+    private final ProducerServiceImpl producerService;
 
     @GetMapping("admin/products")
     public String getAllProducts(Model model) {

@@ -14,8 +14,8 @@ import java.util.List;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserServiceImpl implements UserService {
 
-    private UserEntityRepository repository;
-    private UserMapper mapper;
+    private final UserEntityRepository repository;
+    private final UserMapper mapper;
 
     @Override
     public void createUser(User user) {
