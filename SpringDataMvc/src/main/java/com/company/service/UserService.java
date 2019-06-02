@@ -13,7 +13,7 @@ public interface UserService {
     @Interceptors(SimpleLogger.class)
     void createUser(User user);
 
-    User getUserById(int id) throws NotFoundEntityExeption, Exception;
+    User getUserById(int id) throws Exception;
 
     void updateUser(User user);
 

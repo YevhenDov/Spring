@@ -7,7 +7,7 @@
 <body>
 <div align="center">
     <h1>User manager</h1>
-    <h3><a href="/add">Add User</a></h3>
+    <h3><a href="/products">Add User</a></h3>
     <table border="1" padding="5">
         <tr>
             <th>ID</th>
@@ -16,7 +16,7 @@
             <th>Email</th>
             <th>Create</th>
         </tr>
-        <c:forEach var="user" items="${users}">
+        <c:forEach var="product" items="${}">
             <tr>
                 <td>${user.id}</td>
                 <td>${user.name}</td>
