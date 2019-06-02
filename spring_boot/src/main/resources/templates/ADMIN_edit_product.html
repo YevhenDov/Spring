@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editing a product</title>
+</head>
+<body>
+<div align="center">
+    <h2>Edit a product</h2>
+    <form action="#" th:action="@{/admin/save_product}"
+          method="post">
+        <tr>
+            <td>Product ID</td>
+            <td><input type="text" th:field="${product.id}" readonly="readonly" /></td>
+        </tr>
+        <tr>
+            <td>Product Name</td>
+            <td><input type="text" th:field="${product.name}"/></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Product Price</td>
+            <td><input type="text" th:field="${product.price}"/></td>
+            <br>
+        </tr>
+        <tr>
+            <td>Product Producer</td>
+            <td><select th:field="${product.producerName}">
+                <option th:each="producer : ${producers}"
+                        th:value="${producer.name}"
+                        th:text="${producer.name}"></option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Save"/></td>
+        </tr>
+    </form>
+</div>
+</body>
+</html>

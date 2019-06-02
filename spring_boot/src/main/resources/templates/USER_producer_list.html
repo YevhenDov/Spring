@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Manager</title>
+</head>
+<body>
+<div align="center">
+    <h1>Producers manager</h1>
+    <table border="1" padding="5">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        <th:block th:each="producer : ${producers}">
+            <tr>
+                <td th:text="${producer.id}"></td>
+                <td th:text="${producer.name}"></td>
+            </tr>
+        </th:block>
+    </table>
+    <a th:href="@{/}">Home</a>
+</div>
+</body>
+</html>
