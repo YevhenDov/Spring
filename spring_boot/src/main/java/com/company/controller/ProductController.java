@@ -3,6 +3,7 @@ package com.company.controller;
 import com.company.controller.dto.Product;
 import com.company.service.impl.ProducerServiceImpl;
 import com.company.service.impl.ProductServiceImpl;
+import com.company.transformer.ProducerMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ public class ProductController {
 
     private final ProductServiceImpl productService;
     private final ProducerServiceImpl producerService;
+    private final ProducerMapper producerMapper;
 
     @GetMapping("admin/products")
     public String getAllProducts(Model model) {
@@ -39,7 +41,7 @@ public class ProductController {
 
     @PostMapping("admin/save_product")
     public String saveProduct(@ModelAttribute("product") Product product) {
-        product.setProducer(producerService.getProducerByName(product.getProducerName()));
+        product.setProducer(producerMapper.mapProducerToProducerEntity(producerService.getProducerByName(product.getProducerName())));
         productService.createProduct(product);
 
         return "redirect:/admin/products";

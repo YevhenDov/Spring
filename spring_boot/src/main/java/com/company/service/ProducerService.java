@@ -16,5 +16,5 @@ public interface ProducerService {
 
     List<Producer> getAllProducers();
 
-    ProducerEntity getProducerByName(String name);
+    Producer getProducerByName(String name);
 }

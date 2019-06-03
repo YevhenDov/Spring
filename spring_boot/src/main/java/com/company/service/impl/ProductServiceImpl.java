@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(Long id) {
-        return mapper.mapProductEntityToProduct(repository.findById(id).get());
+        return mapper.mapProductEntityToProduct(repository.findById(id).orElse(null));
     }
 
     @Override

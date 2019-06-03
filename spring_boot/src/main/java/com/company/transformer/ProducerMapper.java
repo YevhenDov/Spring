@@ -9,7 +9,12 @@ import java.util.stream.Collectors;
 
 @Component
 public class ProducerMapper {
-    public ProducerEntity mapProducerToProducerEntity(Producer producer){
+    public ProducerEntity mapProducerToProducerEntity(Producer producer) {
+
+        if (producer == null) {
+            return null;
+        }
+
         ProducerEntity producerEntity = new ProducerEntity();
 
         producerEntity.setId(producer.getId());
@@ -19,7 +24,11 @@ public class ProducerMapper {
         return producerEntity;
     }
 
-    public Producer mapProducerEntityToProducer(ProducerEntity producerEntity){
+    public Producer mapProducerEntityToProducer(ProducerEntity producerEntity) {
+
+        if (producerEntity == null) {
+            return null;
+        }
         Producer producer = new Producer();
 
         producer.setId(producerEntity.getId());
@@ -29,7 +38,12 @@ public class ProducerMapper {
         return producer;
     }
 
-    public List<Producer> mapProducerEntityListToProducerList(List<ProducerEntity> producerEntities){
+    public List<Producer> mapProducerEntityListToProducerList(List<ProducerEntity> producerEntities) {
+
+        if (producerEntities == null) {
+            return null;
+        }
+
         return producerEntities
                 .stream()
                 .map(this::mapProducerEntityToProducer)

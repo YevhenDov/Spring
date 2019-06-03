@@ -10,6 +10,11 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
     public UserEntity mapUserToUserEntity(User user) {
+
+        if (user == null){
+            return null;
+        }
+
         UserEntity userEntity = new UserEntity();
 
         userEntity.setId(user.getId());
@@ -23,6 +28,11 @@ public class UserMapper {
     }
 
     public User mapUserEntityToUser(UserEntity userEntity) {
+
+        if (userEntity == null){
+            return null;
+        }
+
         User user = new User();
 
         user.setId(userEntity.getId());
@@ -35,6 +45,11 @@ public class UserMapper {
     }
 
     public List<User> mapUserEntityListToUserList(List<UserEntity> userEntities){
+
+        if (userEntities == null){
+            return null;
+        }
+
         return userEntities
                 .stream()
                 .map(this::mapUserEntityToUser)

@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long id) {
-        return mapper.mapUserEntityToUser(repository.findById(id).get());
+        return mapper.mapUserEntityToUser(repository.findById(id).orElse(null));
     }
 
     @Override
@@ -44,6 +44,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByEmail(String email) {
-        return mapper.mapUserEntityToUser(repository.findByEmail(email));
+        return mapper.mapUserEntityToUser(repository.findByEmail(email).orElse(null));
     }
 }

@@ -25,7 +25,7 @@ public class ProducerServiceImpl implements ProducerService {
 
     @Override
     public Producer getProducerById(Long id) {
-        return mapper.mapProducerEntityToProducer(repository.findById(id).get());
+        return mapper.mapProducerEntityToProducer(repository.findById(id).orElse(null));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ProducerServiceImpl implements ProducerService {
     }
 
     @Override
-    public ProducerEntity getProducerByName(String name) {
-        return repository.findByName(name);
+    public Producer getProducerByName(String name) {
+        return mapper.mapProducerEntityToProducer(repository.findByName(name).orElse(null));
     }
 }

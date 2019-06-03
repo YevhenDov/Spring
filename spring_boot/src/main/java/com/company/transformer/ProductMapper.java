@@ -10,6 +10,11 @@ import java.util.stream.Collectors;
 @Component
 public class ProductMapper {
     public ProductEntity mapProductToProductEntity(Product product){
+
+        if (product == null) {
+            return null;
+        }
+
         ProductEntity productEntity = new ProductEntity();
 
         productEntity.setId(product.getId());
@@ -21,6 +26,11 @@ public class ProductMapper {
     }
 
     public Product mapProductEntityToProduct(ProductEntity productEntity){
+
+        if (productEntity == null) {
+            return null;
+        }
+
         Product product = new Product();
 
         product.setId(productEntity.getId());
