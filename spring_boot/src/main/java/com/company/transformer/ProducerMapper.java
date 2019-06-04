@@ -1,7 +1,6 @@
 package com.company.transformer;
 
 import com.company.controller.dto.Producer;
-import com.company.entity.ProducerEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,13 +8,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class ProducerMapper {
-    public ProducerEntity mapProducerToProducerEntity(Producer producer) {
+    public com.company.entity.ProducerEntity mapProducerToProducerEntity(Producer producer) {
 
         if (producer == null) {
             return null;
         }
 
-        ProducerEntity producerEntity = new ProducerEntity();
+        com.company.entity.ProducerEntity producerEntity = new com.company.entity.ProducerEntity();
 
         producerEntity.setId(producer.getId());
         producerEntity.setName(producer.getName());
@@ -24,7 +23,7 @@ public class ProducerMapper {
         return producerEntity;
     }
 
-    public Producer mapProducerEntityToProducer(ProducerEntity producerEntity) {
+    public Producer mapProducerEntityToProducer(com.company.entity.ProducerEntity producerEntity) {
 
         if (producerEntity == null) {
             return null;
@@ -38,7 +37,7 @@ public class ProducerMapper {
         return producer;
     }
 
-    public List<Producer> mapProducerEntityListToProducerList(List<ProducerEntity> producerEntities) {
+    public List<Producer> mapProducerEntityListToProducerList(List<com.company.entity.ProducerEntity> producerEntities) {
 
         if (producerEntities == null) {
             return null;

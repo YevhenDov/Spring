@@ -28,11 +28,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUer(User user) {
-        repository.save(mapper.mapUserToUserEntity(user));
-    }
-
-    @Override
     public void deleteUserById(Long id) {
         repository.deleteById(id);
     }

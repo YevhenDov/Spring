@@ -28,11 +28,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(Product product) {
-        repository.save(mapper.mapProductToProductEntity(product));
-    }
-
-    @Override
     public void deleteProductId(Long id) {
         repository.deleteById(id);
     }

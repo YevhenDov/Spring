@@ -1,7 +1,6 @@
 package com.company.service.impl;
 
 import com.company.controller.dto.Producer;
-import com.company.entity.ProducerEntity;
 import com.company.repository.ProducerEntityRepository;
 import com.company.service.ProducerService;
 import com.company.transformer.ProducerMapper;
@@ -26,11 +25,6 @@ public class ProducerServiceImpl implements ProducerService {
     @Override
     public Producer getProducerById(Long id) {
         return mapper.mapProducerEntityToProducer(repository.findById(id).orElse(null));
-    }
-
-    @Override
-    public void updateProducer(Producer producer) {
-        repository.save(mapper.mapProducerToProducerEntity(producer));
     }
 
     @Override
