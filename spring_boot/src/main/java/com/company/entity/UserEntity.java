@@ -23,7 +23,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class UserEntity extends BaseEntity {
+public class UserEntity extends UuidEntity {
 
     @Column(name = "email")
     private String email;

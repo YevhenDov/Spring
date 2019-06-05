@@ -22,7 +22,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class ProductEntity extends BaseEntity {
+public class ProductEntity extends UuidEntity {
 
     @Column(name = "name")
     private String name;

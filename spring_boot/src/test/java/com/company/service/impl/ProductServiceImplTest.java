@@ -11,8 +11,10 @@ import com.company.transformer.ProductMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
@@ -22,6 +24,7 @@ import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@TestPropertySource(locations = "classpath:test-application.properties")
 public class ProductServiceImplTest {
 
     @Autowired
@@ -30,10 +33,9 @@ public class ProductServiceImplTest {
     private ProducerService producerService;
     @Autowired
     private ProductEntityRepository repository;
-    @Autowired
-    private ProducerMapper producerMapper;
-    @Autowired
-    private ProductMapper productMapper;
+
+    private ProducerMapper producerMapper = Mappers.getMapper(ProducerMapper.class);
+    private ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
 
     private Product product;
     private Producer producer;

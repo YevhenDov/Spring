@@ -3,22 +3,22 @@ package com.company.transformer;
 import com.company.controller.dto.User;
 import com.company.entity.UserEntity;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mapstruct.factory.Mappers;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
-public class UserMapperTest {
+public class UserMapperImplTest {
 
-    @Autowired
-    private UserMapper mapper;
+    private UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
     @Test
     public void mapUserToUserEntity() {
@@ -68,6 +68,24 @@ public class UserMapperTest {
 
         users = mapper.mapUserEntityListToUserList(userEntities);
 
-        assertEquals(users.size(), userEntities.size());
+        assertThat(users, is(userEntities));
+    }
+
+    @Test
+    public void mapUserToUserEntityWithNullArgument() {
+        UserEntity userEntity = mapper.mapUserToUserEntity(null);
+        assertNull(userEntity);
+    }
+
+    @Test
+    public void mapUserEntityToUserWithNullArgument() {
+        User user = mapper.mapUserEntityToUser(null);
+        assertNull(user);
+    }
+
+    @Test
+    public void mapUserEntityListToUserListWithNullArgument() {
+        List<User> users = mapper.mapUserEntityListToUserList(null);
+        assertNull(users);
     }
 }

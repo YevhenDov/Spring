@@ -1,6 +1,5 @@
 package com.company.entity;
 
-import com.company.controller.dto.Producer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +8,7 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
@@ -20,12 +20,12 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class ProducerEntity extends BaseEntity{
+public class ProducerEntity extends UuidEntity{
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "producer")
+    @OneToMany(mappedBy = "producer", fetch = FetchType.EAGER)
     private Set<ProductEntity> products;
 
     @Override

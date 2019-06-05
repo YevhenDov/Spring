@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 @Accessors(chain = true)
 public class Product {
     private Long id;
+    private UUID uuid;
     private String name;
     private BigDecimal price;
     private ProducerEntity producer;

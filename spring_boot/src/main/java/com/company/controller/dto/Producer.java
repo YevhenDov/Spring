@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,6 +18,7 @@ import java.util.Set;
 @Accessors(chain = true)
 public class Producer {
     private Long id;
+    private UUID uuid;
     private String name;
     private Set<ProductEntity> products;
 

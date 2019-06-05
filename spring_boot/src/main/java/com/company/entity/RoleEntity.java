@@ -20,7 +20,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class
-RoleEntity extends BaseEntity {
+RoleEntity extends UuidEntity {
 
     @Column(name = "name")
     private String name;

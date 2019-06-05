@@ -1,11 +1,14 @@
 package com.company.service.impl;
 
 import com.company.controller.dto.Producer;
+import com.company.transformer.ProducerMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static junit.framework.TestCase.assertEquals;
@@ -13,11 +16,13 @@ import static junit.framework.TestCase.assertNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@TestPropertySource(locations = "classpath:test-application.properties")
 public class ProducerServiceImplTest {
 
     @Autowired
     private ProducerServiceImpl service;
     private Producer producer;
+    private ProducerMapper mapper = Mappers.getMapper(ProducerMapper.class);
 
     @Before
     public void setUp() throws Exception {
@@ -34,14 +39,14 @@ public class ProducerServiceImplTest {
 
         service.createProducer(producer);
         Producer producerByName = service.getProducerByName(producer.getName());
-        assertEquals(producer, producerByName);
+        assertEquals(producer, mapper.mapProducerToProducerEntity(producerByName));
     }
 
     @Test
     public void getProducerById() {
         Producer producerById = service.getProducerById(1L);
 
-        assertEquals(producer, producerById);
+        assertEquals(producer, mapper.mapProducerToProducerEntity(producerById));
     }
 
 
@@ -62,6 +67,6 @@ public class ProducerServiceImplTest {
         Producer producer = new Producer()
                 .setName("Samsung");
         service.createProducer(producer);
-        assertEquals(producer, service.getProducerByName(producer.getName()));
+        assertEquals(producer, mapper.mapProducerToProducerEntity(service.getProducerByName(producer.getName())));
     }
 }

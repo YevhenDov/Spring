@@ -4,24 +4,22 @@ import com.company.controller.dto.Product;
 import com.company.entity.ProducerEntity;
 import com.company.entity.ProductEntity;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mapstruct.factory.Mappers;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
-
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProductMapperTest {
+public class ProductMapperImplTest {
 
-    @Autowired
-    private ProductMapper mapper;
+    private ProductMapper mapper = Mappers.getMapper(ProductMapper.class);
 
     @Test
     public void mapProductToProductEntity() {
@@ -47,6 +45,7 @@ public class ProductMapperTest {
         Product product = mapper.mapProductEntityToProduct(productEntity);
 
         assertEquals(product, productEntity);
+
     }
 
     @Test
@@ -71,6 +70,24 @@ public class ProductMapperTest {
 
         products = mapper.mapProductEntityListToProductList(productEntities);
 
-        assertEquals(productEntities.size(), products.size());
+        assertThat(products,is(productEntities));
+    }
+
+    @Test
+    public void mapProductToProductEntityWithNullArgument() {
+        ProductEntity productEntity = mapper.mapProductToProductEntity(null);
+        assertNull(productEntity);
+    }
+
+    @Test
+    public void mapProductEntityToProductWithNullArgument() {
+        Product product = mapper.mapProductEntityToProduct(null);
+        assertNull(product);
+    }
+
+    @Test
+    public void mapProductEntityListToProductListWithNullArgument() {
+        List<Product> products = mapper.mapProductEntityListToProductList(null);
+        assertNull(products);
     }
 }
