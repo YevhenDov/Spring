@@ -17,8 +17,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain
-        = true)
+@Accessors(chain = true)
 @EntityListeners(value = UuidEntityListener.class)
 public class UuidEntity extends BaseEntity{
 

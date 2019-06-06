@@ -4,40 +4,43 @@ import com.company.controller.dto.Producer;
 import com.company.service.impl.ProducerServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
-@Controller
+@RestController
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ProducerController {
 
     private final ProducerServiceImpl service;
 
     @GetMapping("/admin/producers")
-    public String getAllProducers(Model model){
-        model.addAttribute("producers", service.getAllProducers());
-        return "ADMIN_producer_list";
+    public ModelAndView getAllProducers(){
+        ModelAndView modelAndView = new ModelAndView("ADMIN_producer_list");
+        modelAndView.addObject("producers", service.getAllProducers());
+        return modelAndView;
     }
 
-    @GetMapping("/admin/producer_form")
-    public String producerForm(Model model){
+    @GetMapping("/admin/producer-form")
+    public ModelAndView producerForm(){
         Producer producer = new Producer();
-        model.addAttribute("producer", producer);
-        return "ADMIN_producer_form";
+        ModelAndView modelAndView = new ModelAndView("ADMIN_producer_form");
+        modelAndView.addObject("producer", producer);
+        return modelAndView;
     }
 
-    @PostMapping("/admin/save_producer")
-    public String saveProducer(@ModelAttribute("producer") Producer producer){
+    @PostMapping("/admin/save-producer")
+    public RedirectView saveProducer(@ModelAttribute("producer") Producer producer){
         service.createProducer(producer);
-        return "redirect:/admin/producers";
+        return new RedirectView("/admin/producers");
     }
 
-    @GetMapping("/admin/edit_producer/{id}")
+    @GetMapping("/admin/edit-producer/{id}")
     public ModelAndView editProductForm(@PathVariable(name = "id") Long id){
         ModelAndView modelAndView = new ModelAndView("ADMIN_edit_producer");
         Producer producer = service.getProducerById(id);
@@ -46,15 +49,16 @@ public class ProducerController {
         return modelAndView;
     }
 
-    @GetMapping("admin/delete_producer/{id}")
-    public String deleteProduct(@PathVariable(name = "id") Long id){
+    @DeleteMapping("/admin/delete-producer/{id}")
+    public RedirectView deleteProducer(@PathVariable(name = "id") Long id){
         service.deleteProducerById(id);
-        return "redirect:/admin/producers";
+        return new RedirectView("/admin/producers");
     }
 
     @GetMapping("user/producers")
-    public String getAllProducersForUser(Model model){
-        model.addAttribute("producers", service.getAllProducers());
-        return "USER_producer_list";
+    public ModelAndView getAllProducersForUser(){
+        ModelAndView modelAndView = new ModelAndView("USER_producer_list");
+        modelAndView.addObject("producers", service.getAllProducers());
+        return modelAndView;
     }
 }

@@ -38,11 +38,10 @@ public class ProductServiceImplTest {
     private ProductMapper productMapper = Mappers.getMapper(ProductMapper.class);
 
     private Product product;
-    private Producer producer;
 
     @Before
     public void setUp() throws Exception {
-        producer = new Producer()
+        Producer producer = new Producer()
                 .setName("Asus");
 
         producerService.createProducer(producer);

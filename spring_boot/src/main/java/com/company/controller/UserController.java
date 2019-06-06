@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,33 +34,34 @@ public class UserController {
         return "hello";
     }
 
-    @GetMapping("/registration_form")
-    public String registerForm(Model model){
+    @GetMapping("/registration-form")
+    public ModelAndView registerForm(){
         User user = new User();
+        ModelAndView modelAndView = new ModelAndView("registration-form");
+        modelAndView.addObject("user", user);
 
-        model.addAttribute("user", user);
-        return "registration_form";
+        return modelAndView;
     }
 
     @PostMapping("/registration")
-    public String userRegistration(@ModelAttribute("user") User user){
+    public RedirectView userRegistration(@ModelAttribute("user") User user){
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Set<RoleEntity> roles = new HashSet<>();
         roles.add(roleService.getRoleById(2L));
         user.setRoles(roles);
         userService.createUser(user);
 
-        return "redirect:/admin/users";
+        return new RedirectView("redirect:/admin/users");
     }
 
     @GetMapping("/admin/users")
-    public String allUsers(Model model){
-        model.addAttribute("users" , userService.getAllUsers());
-
-        return "ADMIN_users_list";
+    public ModelAndView allUsers(){
+        ModelAndView modelAndView = new ModelAndView("ADMIN_users_list");
+        modelAndView.addObject("users" , userService.getAllUsers());
+        return modelAndView;
     }
 
-    @GetMapping("/admin/edit_user/{id}")
+    @GetMapping("/admin/edit-user/{id}")
     public ModelAndView editProductForm(@PathVariable(name = "id") Long id){
         ModelAndView modelAndView = new ModelAndView("ADMIN_edit_user");
         User user = userService.getUserById(id);
@@ -68,16 +71,16 @@ public class UserController {
         return modelAndView;
     }
 
-    @GetMapping("/admin/delete_user/{id}")
-    public String deleteProduct(@PathVariable(name = "id") Long id){
+    @DeleteMapping("/admin/delete-user/{id}")
+    public RedirectView deleteProduct(@PathVariable(name = "id") Long id){
         userService.deleteUserById(id);
-        return "redirect:/admin/users";
+        return new RedirectView("redirect:/admin/users");
     }
 
     @GetMapping("/user/users")
-    public String allUsersForUser(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
-
-        return "USER_user_list";
+    public ModelAndView allUsersForUser() {
+        ModelAndView modelAndView = new ModelAndView("USER_user_list");
+        modelAndView.addObject("users", userService.getAllUsers());
+        return modelAndView;
     }
 }

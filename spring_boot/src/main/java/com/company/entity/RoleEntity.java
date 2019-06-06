@@ -19,8 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class
-RoleEntity extends UuidEntity {
+public class RoleEntity extends UuidEntity {
 
     @Column(name = "name")
     private String name;
