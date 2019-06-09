@@ -37,7 +37,7 @@ public class UserController {
     @GetMapping("/registration-form")
     public ModelAndView registerForm(){
         User user = new User();
-        ModelAndView modelAndView = new ModelAndView("registration-form");
+        ModelAndView modelAndView = new ModelAndView("registration_form");
         modelAndView.addObject("user", user);
 
         return modelAndView;
@@ -51,7 +51,7 @@ public class UserController {
         user.setRoles(roles);
         userService.createUser(user);
 
-        return new RedirectView("redirect:/admin/users");
+        return new RedirectView("/admin/users");
     }
 
     @GetMapping("/admin/users")
@@ -74,7 +74,7 @@ public class UserController {
     @DeleteMapping("/admin/delete-user/{id}")
     public RedirectView deleteProduct(@PathVariable(name = "id") Long id){
         userService.deleteUserById(id);
-        return new RedirectView("redirect:/admin/users");
+        return new RedirectView("/admin/users");
     }
 
     @GetMapping("/user/users")

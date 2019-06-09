@@ -40,7 +40,7 @@ public class ProductServiceImplTest {
     private Product product;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Producer producer = new Producer()
                 .setName("Asus");
 

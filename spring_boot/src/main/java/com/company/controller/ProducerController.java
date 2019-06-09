@@ -49,7 +49,7 @@ public class ProducerController {
         return modelAndView;
     }
 
-    @DeleteMapping("/admin/delete-producer/{id}")
+    @GetMapping("/admin/delete-producer/{id}")
     public RedirectView deleteProducer(@PathVariable(name = "id") Long id){
         service.deleteProducerById(id);
         return new RedirectView("/admin/producers");

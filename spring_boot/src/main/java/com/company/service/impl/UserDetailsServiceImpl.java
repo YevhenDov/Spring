@@ -21,7 +21,6 @@ import java.util.List;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserServiceImpl userService;
-    private final RoleServiceImpl roleService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -29,19 +28,23 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<String> roleNames = new ArrayList<>();
         List<GrantedAuthority> authorityList = new ArrayList<>();
 
-        if (user == null){
-            log.info("User with this email not found: " + email);
-            throw new UsernameNotFoundException("User " + email + " was not found in the database");
+        try {
+            if (user == null) {
+                log.info("User with this email not found: " + email);
+                throw new UsernameNotFoundException("User " + email + " was not found in the database");
+            }
+        } catch (UsernameNotFoundException e) {
+            e.getMessage();
         }
 
         log.info("Found user: " + email);
 
-        for (RoleEntity roleEntity : roleService.getRoleEntities()){
+        for (RoleEntity roleEntity : user.getRoles()) {
             roleNames.add(roleEntity.getName());
         }
 
-        if (roleNames.size() > 0){
-            for (String role : roleNames){
+        if (roleNames.size() > 0) {
+            for (String role : roleNames) {
                 GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role);
                 authorityList.add(grantedAuthority);
             }

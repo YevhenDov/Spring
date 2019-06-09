@@ -1,5 +1,6 @@
 package com.company.controller;
 
+import com.company.controller.dto.Producer;
 import com.company.controller.dto.Product;
 import com.company.service.impl.ProducerServiceImpl;
 import com.company.service.impl.ProductServiceImpl;
@@ -47,7 +48,8 @@ public class ProductController {
 
     @PostMapping("admin/save-product")
     public RedirectView saveProduct(@ModelAttribute("product") Product product) {
-        product.setProducer(producerMapper.mapProducerToProducerEntity(producerService.getProducerByName(product.getProducerName())));
+        Producer producerByName = producerService.getProducerByName(product.getProducerName());
+        product.setProducer(producerMapper.mapProducerToProducerEntity(producerByName));
         productService.createProduct(product);
 
         return new RedirectView("admin/products");
@@ -63,7 +65,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @DeleteMapping("admin/delete-product/{id}")
+    @GetMapping("admin/delete-product/{id}")
     public RedirectView deleteProduct(@PathVariable(name = "id") Long id) {
         productService.deleteProductId(id);
 

@@ -18,8 +18,8 @@ public class WehSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/registration_form", "/registration").permitAll()
-                    .antMatchers("/user/**").hasAuthority("USER")
+                    .antMatchers("/", "/registration-form", "/registration").permitAll()
+                    .antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
                     .antMatchers("/admin/**").hasAuthority("ADMIN")
                     .anyRequest().authenticated()
                 .and()
