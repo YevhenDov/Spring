@@ -16,6 +16,11 @@ public class RoleServiceImpl implements RoleService {
     private final RoleEntityRepository repository;
 
     @Override
+    public void createRoleEntity(RoleEntity roleEntity) {
+        repository.save(roleEntity);
+    }
+
+    @Override
     public List<RoleEntity> getRoleEntities() {
         return repository.findAll();
     }

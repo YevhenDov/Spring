@@ -21,6 +21,6 @@ import java.util.UUID;
 @EntityListeners(value = UuidEntityListener.class)
 public class UuidEntity extends BaseEntity{
 
-    @Column(name = "UUID")
+    @Column(name = "uuid")
     private UUID uuid;
 }

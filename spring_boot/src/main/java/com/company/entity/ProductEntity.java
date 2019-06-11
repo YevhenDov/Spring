@@ -30,6 +30,6 @@ public class ProductEntity extends UuidEntity {
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.ALL)
     private ProducerEntity producer;
 }
